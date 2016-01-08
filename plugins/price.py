@@ -86,3 +86,34 @@ def load_typeids_file(path: str):
 
 def init():
     load_typeids_file(TYPEIDS_CSV)
+
+
+
+def price_return_formatter(x):  # Test casing for formatting prices in standard EVE Player Format, ie 2M, 25Bn, 100K, etc...
+    priceAbrvList = ['K', 'M', 'Bn', 'T']
+
+    formatPrice = get_jita_sell_price(x)
+
+    priceModuloT = int(formatPrice) / 10000000000   # Price in Trillions
+    priceModuloBn = int(formatPrice) / 1000000000   # Price in Billions
+    priceModuloM = int(formatPrice) / 1000000       # Price in Millions
+    priceModuloK = int(formatPrice) / 1000          # Price in Thousands
+
+    formattedPricesList = [priceModuloK, priceModuloM, priceModuloBn, priceModuloT]
+
+    for num in formattedPricesList:
+        if num > 1 and num < 1000:
+            strNum = str(num)
+            priceLength = str(int(formatPrice))
+            if len(priceLength) < 7:
+                print(strNum[:5] + priceAbrvList[0])
+            elif len(priceLength) > 6 and len(priceLength) < 10:
+                print(strNum[:5] + priceAbrvList[1])
+            elif len(priceLength) > 9 and len(priceLength) < 13:
+                print(strNum[:5] + priceAbrvList[2])
+            elif len(priceLength) > 12 and len(priceLength) < 16:
+                print(strNum[:5] + priceAbrvList[3])
+            else:
+                print(strNum[:5] + priceAbrvList[1])
+
+price_return_formatter(29668)
