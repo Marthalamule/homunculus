@@ -41,9 +41,12 @@ def on_message(message):
     elif message.content.startswith('Are you there?'):
         reply(client, message, "Yes, yes I am. No worries. Everything is fine.")
 
-    # This needed to be done.
+    # This needed to be done. With updated responses!
     elif message.content.startswith('!poop'):
-        post = "{} and Poop are friends."\
+        if message.author.name == 'Ipoopedbad Ernaga':
+            post = "Narcissist"
+        else:
+            post = "{} and Poop are friends."\
             .format(message.author.mention())
         reply(client, message, post)
 
