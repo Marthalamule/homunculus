@@ -88,7 +88,6 @@ def init():
     load_typeids_file(TYPEIDS_CSV)
 
 
-
 def price_return_formatter(x):  # Test casing for formatting prices in standard EVE Player Format, ie 2M, 25Bn, 100K, etc...
     priceAbrvList = ['K', 'M', 'Bn', 'T']
 
@@ -116,4 +115,10 @@ def price_return_formatter(x):  # Test casing for formatting prices in standard 
             else:
                 print(strNum[:5] + priceAbrvList[1])
 
-price_return_formatter(29668)
+def priceCommandTesting():
+    # Runs tests on all common types of inputs, outputs, items, whatever
+    price_return_formatter(29668)
+    for x in range(19400,19423):
+        price_return_formatter(x)
+
+priceCommandTesting()

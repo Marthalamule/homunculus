@@ -22,3 +22,26 @@ def get_entity_name(id: int) -> str:
     # second: row in a rowset (0)
     # third: accessing the name for the name, id tuple.
     return tree[1][0][0].attrib['name']
+
+
+def get_corp_name(id: int) ->str:       #Function to pull the Corporation Name from Corp ID
+    url = "http://evewho.com/api.php?type=corporation&id=" +str(id)
+    result = requests.get(url).json()
+
+    corp_info = result['info'].copy()
+    print(corp_info['name'])
+
+get_corp_name(98114328)
+
+def get_corp_history(id: int) ->str:
+    url = "http://evewho.com/api.php?type=character&id=" +str(id)
+    result = requests.get(url).json()
+
+    corp_history_list = result['history'].copy()
+
+    print(type(corp_history_list))
+
+    for corp in corp_history_list:
+        get_corp_name(corp['corporation_id'])
+
+get_corp_history(776784803)

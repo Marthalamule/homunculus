@@ -23,5 +23,6 @@ def handle(message, client):
         client.send_message(message.channel, msg)
 
     except TypeError:
-        reply(client, message, "\nDid not find your dude. "
+        reply(client, message, "\nNo killboard information found on pilot. "
                                "\nEnter a dude who's bad enough to be found. ")
+
