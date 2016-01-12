@@ -28,10 +28,14 @@ def get_corp_name(id: int) ->str:       #Function to pull the Corporation Name f
     url = "http://evewho.com/api.php?type=corporation&id=" +str(id)
     result = requests.get(url).json()
 
-    corp_info = result['info'].copy()
-    print(corp_info['name'])
+    try:
+        corp_info = result['info'].copy()
+        print(corp_info)
+    except ValueError:
+        print('corp info exception fired')
+        return corp_info
 
-get_corp_name(98114328)
+#get_corp_name(98114328)
 
 def get_corp_history(id: int) ->str:
     url = "http://evewho.com/api.php?type=character&id=" +str(id)
@@ -39,9 +43,13 @@ def get_corp_history(id: int) ->str:
 
     corp_history_list = result['history'].copy()
 
-    print(type(corp_history_list))
+    #print(type(corp_history_list))
 
     for corp in corp_history_list:
-        get_corp_name(corp['corporation_id'])
+        try:
+            get_corp_name(corp['corporation_id'])
+        except ValueError:
+            print('corp id exception fired' + corp['corporation_id'])
+            return corp['corporation_id']
 
 get_corp_history(776784803)
